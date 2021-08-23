@@ -5,7 +5,7 @@ namespace BowlingGameKata
 {
     public class Game
     {
-        private List<int> rolls = new List<int>(21);
+        private List<int> rolls = new List<int>();
 
         public void Roll(int numOfPins)
         {
@@ -26,6 +26,12 @@ namespace BowlingGameKata
 
                         rollIndex += 2;
                     }
+                    else if (isStrike(rollIndex))
+                    {
+                        score += 10 + rolls[rollIndex + 1] + rolls[rollIndex + 2];
+
+                        rollIndex++;
+                    }
                     else
                     {
                         score += rolls[rollIndex];
@@ -42,6 +48,11 @@ namespace BowlingGameKata
         private bool isSpare(int rollIndex)
         {
             return rolls[rollIndex] + rolls[rollIndex + 1] == 10;
+        }
+
+        private bool isStrike(int rollIndex)
+        {
+            return rolls[rollIndex] == 10;
         }
     }
 }
