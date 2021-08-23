@@ -20,22 +20,23 @@ namespace BowlingGameKata
                 int rollIndex = 0;
                 for (int frame = 0; frame < 10; frame++)
                 {
-                    if (isSpare(rollIndex))
-                    {
-                        score += 10 + rolls[rollIndex + 2];
 
-                        rollIndex += 2;
-                    }
-                    else if (isStrike(rollIndex))
+
+                    if (isStrike(rollIndex))
                     {
-                        score += 10 + rolls[rollIndex + 1] + rolls[rollIndex + 2];
+                        score += CalculateStrikeFrame(rollIndex);
 
                         rollIndex++;
                     }
+                    else if (isSpare(rollIndex))
+                    {
+                        score += CalculateSpareFrame(rollIndex);
+
+                        rollIndex += 2;
+                    }
                     else
                     {
-                        score += rolls[rollIndex];
-                        score += rolls[rollIndex + 1];
+                        score += CalculateNormalFrame(rollIndex);
 
                         rollIndex += 2;
                     }
@@ -43,6 +44,21 @@ namespace BowlingGameKata
 
                 return score;
             }
+        }
+
+        private int CalculateNormalFrame(int rollIndex)
+        {
+            return rolls[rollIndex] + rolls[rollIndex + 1];
+        }
+
+        private int CalculateStrikeFrame(int rollIndex)
+        {
+            return 10 + rolls[rollIndex + 1] + rolls[rollIndex + 2];
+        }
+
+        private int CalculateSpareFrame(int rollIndex)
+        {
+            return 10 + rolls[rollIndex + 2];
         }
 
         private bool isSpare(int rollIndex)
