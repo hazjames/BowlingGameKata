@@ -5,11 +5,27 @@ namespace BowlingGameKata
 {
     public class Game
     {
-        public int Score { get; set; }
+        private List<int> rolls = new List<int>(21);
 
         public void Roll(int numOfPins)
         {
-            throw new NotImplementedException();
+            rolls.Add(numOfPins);
+        }
+
+        public int Score
+        {
+            get
+            {
+                int score = 0;
+                int rollIndex = 0;
+                for (int frame = 0; frame < 10; frame++)
+                {
+                    score += rolls[rollIndex];
+                    score += rolls[rollIndex + 1];
+                }
+
+                return score;
+            }
         }
     }
 }
