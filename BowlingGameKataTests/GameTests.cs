@@ -38,7 +38,7 @@ namespace BowlingGameKataTests
             _sut.Roll(3);
             RollPins(17, 0);
 
-            Assert.Equal(17, _sut.Score);
+            Assert.Equal(16, _sut.Score);
         }
 
         [Fact]

@@ -20,12 +20,28 @@ namespace BowlingGameKata
                 int rollIndex = 0;
                 for (int frame = 0; frame < 10; frame++)
                 {
-                    score += rolls[rollIndex];
-                    score += rolls[rollIndex + 1];
+                    if (isSpare(rollIndex))
+                    {
+                        score += 10 + rolls[rollIndex + 2];
+
+                        rollIndex += 2;
+                    }
+                    else
+                    {
+                        score += rolls[rollIndex];
+                        score += rolls[rollIndex + 1];
+
+                        rollIndex += 2;
+                    }
                 }
 
                 return score;
             }
+        }
+
+        private bool isSpare(int rollIndex)
+        {
+            return rolls[rollIndex] + rolls[rollIndex + 1] == 10;
         }
     }
 }
